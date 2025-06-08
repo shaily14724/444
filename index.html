@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Grade Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Student Grade Calculator</h1>
+  </header>
+  <form id="grade-form">
+    <div class="student-info">
+      <input type="text" placeholder="Student Name" id="StudentName" required />
+      <input type="text" placeholder="Student ID" id="StudentID" required />
+    </div>
+    <div class="grades-input">
+
+      <!-- One table block (repeated with corrected IDs) -->
+      <div class="table" style="border-left: 1px solid grey;">
+        <table>
+          <thead>
+            <tr><td>Linear Algebra:</td></tr>
+          </thead>
+          <tr><td>Quiz 1:</td><td><input type="number" id="Linearquiz1" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 2:</td><td><input type="number" id="Linearquiz2" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 3:</td><td><input type="number" id="Linearquiz3" min="0" max="10" value="0"></td></tr>
+          <tr><td>Minor 1:</td><td><input type="number" id="Linearminor1" min="0" max="20" value="0"></td></tr>
+          <tr><td>Minor 2:</td><td><input type="number" id="Linearminor2" min="0" max="20" value="0"></td></tr>
+          <tr><td>Major:</td><td><input type="number" id="Linearmajor" min="0" max="30" value="0"></td></tr>
+        </table>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead><tr><td>Signals & Systems:</td></tr></thead>
+          <tr><td>Quiz 1:</td><td><input type="number" id="oopsquiz1" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 2:</td><td><input type="number" id="oopsquiz2" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 3:</td><td><input type="number" id="oopsquiz3" min="0" max="10" value="0"></td></tr>
+          <tr><td>Minor 1:</td><td><input type="number" id="oopsminor1" min="0" max="20" value="0"></td></tr>
+          <tr><td>Minor 2:</td><td><input type="number" id="oopsminor2" min="0" max="20" value="0"></td></tr>
+          <tr><td>Major:</td><td><input type="number" id="oopsmajor" min="0" max="30" value="0"></td></tr>
+        </table>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead><tr><td>Data Communication:</td></tr></thead>
+          <tr><td>Quiz 1:</td><td><input type="number" id="NTquiz1" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 2:</td><td><input type="number" id="NTquiz2" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 3:</td><td><input type="number" id="NTquiz3" min="0" max="10" value="0"></td></tr>
+          <tr><td>Minor 1:</td><td><input type="number" id="NTminor1" min="0" max="20" value="0"></td></tr>
+          <tr><td>Minor 2:</td><td><input type="number" id="NTminor2" min="0" max="20" value="0"></td></tr>
+          <tr><td>Major:</td><td><input type="number" id="NTmajor" min="0" max="30" value="0"></td></tr>
+        </table>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead><tr><td>Computer Programming:</td></tr></thead>
+          <tr><td>Quiz 1:</td><td><input type="number" id="DSquiz1" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 2:</td><td><input type="number" id="DSquiz2" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 3:</td><td><input type="number" id="DSquiz3" min="0" max="10" value="0"></td></tr>
+          <tr><td>Minor 1:</td><td><input type="number" id="DSminor1" min="0" max="20" value="0"></td></tr>
+          <tr><td>Minor 2:</td><td><input type="number" id="DSminor2" min="0" max="20" value="0"></td></tr>
+          <tr><td>Major:</td><td><input type="number" id="DSmajor" min="0" max="30" value="0"></td></tr>
+        </table>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead><tr><td>Digital Circuits & Systems:</td></tr></thead>
+          <tr><td>Quiz 1:</td><td><input type="number" id="COAquiz1" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 2:</td><td><input type="number" id="COAquiz2" min="0" max="10" value="0"></td></tr>
+          <tr><td>Quiz 3:</td><td><input type="number" id="COAquiz3" min="0" max="10" value="0"></td></tr>
+          <tr><td>Minor 1:</td><td><input type="number" id="COAminor1" min="0" max="20" value="0"></td></tr>
+          <tr><td>Minor 2:</td><td><input type="number" id="COAminor2" min="0" max="20" value="0"></td></tr>
+          <tr><td>Major:</td><td><input type="number" id="COAmajor" min="0" max="30" value="0"></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" id="submit">Calculate Grade</button>
+      <button type="reset" id="reset">Reset</button>
+    </div>
+  </form>
+
+  <div class="results"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
