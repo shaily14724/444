@@ -1,96 +1,426 @@
+<!-- 
+  Student Grade Calculator
+  - HTML form for entering student info and grades for 5 subjects.
+  - Each subject has 3 quizzes, 2 minors, and 1 major.
+  - Buttons to calculate grade and reset form.
+  - Results are shown in a hidden div, revealed after calculation.
+  - JavaScript at the bottom handles calculation and display logic. 
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <!-- Meta and title -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Grade Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Styles for layout and appearance -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    header {
+      display: flex;
+      justify-content: center;
+    }
+
+    header h1 {
+      color: #ff0000;
+      text-align: center;
+      border: 2px solid black;
+      background-color: rgba(248, 255, 186, 0.662);
+      border-radius: 50px;
+      padding-left: 14px;
+      padding-right: 14px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      margin: 15px;
+      margin-top: 10px;
+    }
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .student-info,
+    .grades-input {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .results {
+      margin: 10px;
+      margin-top: 24px;
+      background: #2a376b36;
+      border-radius: 8px;
+      padding: 4px;
+      display: none;
+    }
+
+    button {
+      background: #4665ff;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      margin-left: 10px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    button[type="reset"] {
+      background: #858585;
+      margin-right: 10px;
+    }
+
+    input {
+      width: 120px;
+      display: inline-block;
+    }
+
+    .table {
+      border-right: 1px solid grey;
+    }
+
+    .grades-input {
+      border-top: 2px solid grey;
+      border-bottom: 2px solid grey;
+    }
+  </style>
 </head>
+
 <body>
   <header>
+    <!-- Main heading -->
     <h1>Student Grade Calculator</h1>
   </header>
   <form id="grade-form">
     <div class="student-info">
+      <!-- Student name and ID inputs -->
       <input type="text" placeholder="Student Name" id="StudentName" required />
       <input type="text" placeholder="Student ID" id="StudentID" required />
     </div>
     <div class="grades-input">
-
-      <!-- One table block (repeated with corrected IDs) -->
+      <!-- Subject tables: Each table is for one subject -->
+      <!-- Physics -->
       <div class="table" style="border-left: 1px solid grey;">
         <table>
           <thead>
-            <tr><td>Linear Algebra:</td></tr>
+            <tr>
+              <td>Physics:</td>
+            </tr>
           </thead>
-          <tr><td>Quiz 1:</td><td><input type="number" id="Linearquiz1" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 2:</td><td><input type="number" id="Linearquiz2" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 3:</td><td><input type="number" id="Linearquiz3" min="0" max="10" value="0"></td></tr>
-          <tr><td>Minor 1:</td><td><input type="number" id="Linearminor1" min="0" max="20" value="0"></td></tr>
-          <tr><td>Minor 2:</td><td><input type="number" id="Linearminor2" min="0" max="20" value="0"></td></tr>
-          <tr><td>Major:</td><td><input type="number" id="Linearmajor" min="0" max="30" value="0"></td></tr>
+          <!-- Quiz and exam inputs for Physics -->
+          <tr>
+            <td>Quiz 1:</td>
+            <td><input type="number" id="Physicsquiz1" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 2:</td>
+            <td><input type="number" id="Physicsquiz2" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 3:</td>
+            <td><input type="number" id="Physicsquiz3" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 1:</td>
+            <td><input type="number" id="Physicsminor1" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 2:</td>
+            <td><input type="number" id="Physicsminor2" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Major:</td>
+            <td><input type="number" id="Physicsmajor" min="0" max="30" value="0"></td>
+          </tr>
         </table>
       </div>
-
+      <!-- Computer Network -->
       <div class="table">
         <table>
-          <thead><tr><td>Signals & Systems:</td></tr></thead>
-          <tr><td>Quiz 1:</td><td><input type="number" id="oopsquiz1" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 2:</td><td><input type="number" id="oopsquiz2" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 3:</td><td><input type="number" id="oopsquiz3" min="0" max="10" value="0"></td></tr>
-          <tr><td>Minor 1:</td><td><input type="number" id="oopsminor1" min="0" max="20" value="0"></td></tr>
-          <tr><td>Minor 2:</td><td><input type="number" id="oopsminor2" min="0" max="20" value="0"></td></tr>
-          <tr><td>Major:</td><td><input type="number" id="oopsmajor" min="0" max="30" value="0"></td></tr>
+          <thead>
+            <tr>
+              <td>Computer Network:</td>
+            </tr>
+          </thead>
+          <!-- Quiz and exam inputs for Computer Network -->
+          <tr>
+            <td>Quiz 1:</td>
+            <td><input type="number" id="CNquiz1" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 2:</td>
+            <td><input type="number" id="CNquiz2" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 3:</td>
+            <td><input type="number" id="CNquiz3" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 1:</td>
+            <td><input type="number" id="CNminor1" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 2:</td>
+            <td><input type="number" id="CNminor2" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Major:</td>
+            <td><input type="number" id="CNmajor" min="0" max="30" value="0"></td>
+          </tr>
         </table>
       </div>
-
+      <!-- Data Structures -->
       <div class="table">
         <table>
-          <thead><tr><td>Data Communication:</td></tr></thead>
-          <tr><td>Quiz 1:</td><td><input type="number" id="NTquiz1" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 2:</td><td><input type="number" id="NTquiz2" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 3:</td><td><input type="number" id="NTquiz3" min="0" max="10" value="0"></td></tr>
-          <tr><td>Minor 1:</td><td><input type="number" id="NTminor1" min="0" max="20" value="0"></td></tr>
-          <tr><td>Minor 2:</td><td><input type="number" id="NTminor2" min="0" max="20" value="0"></td></tr>
-          <tr><td>Major:</td><td><input type="number" id="NTmajor" min="0" max="30" value="0"></td></tr>
+          <thead>
+            <tr>
+              <td>Data Structures:</td>
+            </tr>
+          </thead>
+          <!-- Quiz and exam inputs for Data Structures -->
+          <tr>
+            <td>Quiz 1:</td>
+            <td><input type="number" id="DSquiz1" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 2:</td>
+            <td><input type="number" id="DSquiz2" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 3:</td>
+            <td><input type="number" id="DSquiz3" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 1:</td>
+            <td><input type="number" id="DSminor1" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 2:</td>
+            <td><input type="number" id="DSminor2" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Major:</td>
+            <td><input type="number" id="DSmajor" min="0" max="30" value="0"></td>
+          </tr>
         </table>
       </div>
-
+      <!-- Object - Oriented Programming -->
       <div class="table">
         <table>
-          <thead><tr><td>Computer Programming:</td></tr></thead>
-          <tr><td>Quiz 1:</td><td><input type="number" id="DSquiz1" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 2:</td><td><input type="number" id="DSquiz2" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 3:</td><td><input type="number" id="DSquiz3" min="0" max="10" value="0"></td></tr>
-          <tr><td>Minor 1:</td><td><input type="number" id="DSminor1" min="0" max="20" value="0"></td></tr>
-          <tr><td>Minor 2:</td><td><input type="number" id="DSminor2" min="0" max="20" value="0"></td></tr>
-          <tr><td>Major:</td><td><input type="number" id="DSmajor" min="0" max="30" value="0"></td></tr>
+          <thead>
+            <tr>
+              <td>Object - Oriented Programming:</td>
+            </tr>
+          </thead>
+          <!-- Quiz and exam inputs for Object - Oriented Programming -->
+          <tr>
+            <td>Quiz 1:</td>
+            <td><input type="number" id="OOPquiz1" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 2:</td>
+            <td><input type="number" id="OOPquiz2" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 3:</td>
+            <td><input type="number" id="OOPquiz3" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 1:</td>
+            <td><input type="number" id="OOPminor1" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 2:</td>
+            <td><input type="number" id="OOPminor2" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Major:</td>
+            <td><input type="number" id="OOPmajor" min="0" max="30" value="0"></td>
+          </tr>
         </table>
       </div>
-
+      <!-- Digital Circuits & Systems -->
       <div class="table">
         <table>
-          <thead><tr><td>Digital Circuits & Systems:</td></tr></thead>
-          <tr><td>Quiz 1:</td><td><input type="number" id="COAquiz1" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 2:</td><td><input type="number" id="COAquiz2" min="0" max="10" value="0"></td></tr>
-          <tr><td>Quiz 3:</td><td><input type="number" id="COAquiz3" min="0" max="10" value="0"></td></tr>
-          <tr><td>Minor 1:</td><td><input type="number" id="COAminor1" min="0" max="20" value="0"></td></tr>
-          <tr><td>Minor 2:</td><td><input type="number" id="COAminor2" min="0" max="20" value="0"></td></tr>
-          <tr><td>Major:</td><td><input type="number" id="COAmajor" min="0" max="30" value="0"></td></tr>
+          <thead>
+            <tr>
+              <td>Digital Circuits & Systems:</td>
+            </tr>
+          </thead>
+          <!-- Quiz and exam inputs for Digital Circuits & Systems -->
+          <tr>
+            <td>Quiz 1:</td>
+            <td><input type="number" id="DCSquiz1" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 2:</td>
+            <td><input type="number" id="DCSquiz2" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Quiz 3:</td>
+            <td><input type="number" id="DCSquiz3" min="0" max="10" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 1:</td>
+            <td><input type="number" id="DCSminor1" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Minor 2:</td>
+            <td><input type="number" id="DCSminor2" min="0" max="20" value="0"></td>
+          </tr>
+          <tr>
+            <td>Major:</td>
+            <td><input type="number" id="DCSmajor" min="0" max="30" value="0"></td>
+          </tr>
         </table>
       </div>
     </div>
 
     <div class="actions">
-      <button type="button" id="submit">Calculate Grade</button>
-      <button type="reset" id="reset">Reset</button>
+      <!-- Button to calculate grade -->
+      <button type="button" id="submit">
+        Calculate Grade
+      </button>
+      <!-- Button to reset form -->
+      <button type="reset" id="reset">
+        <!-- this button is used to reset the filled data in the form and the  -->
+        Reset
+      </button>
     </div>
   </form>
 
-  <div class="results"></div>
+  <!-- Results box (hidden by default) -->
+  <div class="results">
+    <!-- In this box the result will come in the website -->
+  </div>
 
-  <script src="script.js"></script>
+  <!-- JavaScript for grade calculation and result display -->
+  <script>
+    // Select the results box
+    const resultBox = document.querySelector(".results");
+    // Handle Calculate Grade button click
+    document.querySelector("#submit").addEventListener("click", function () {
+      // Get student info
+      const StudentName = document.querySelector("#StudentName").value;
+      const StudentID = document.querySelector("#StudentID").value;
+      let x = 0; // Total marks
+      var totalOfOneSubject = 0;
+      // All input IDs for all subjects
+      const ids = [
+        "Physicsquiz1", "Physicsquiz2", "Physicsquiz3", "Physicsminor1", "Physicsminor2", "Physicsmajor",
+        "CNquiz1", "CNquiz2", "CNquiz3", "CNminor1", "CNminor2", "CNmajor",
+        "DSquiz1", "DSquiz2", "DSquiz3", "DSminor1", "DSminor2", "DSmajor",
+        "OOPquiz1", "OOPquiz2", "OOPquiz3", "OOPminor1", "OOPminor2", "OOPmajor",
+        "DCSquiz1", "DCSquiz2", "DCSquiz3", "DCSminor1", "DCSminor2", "DCSmajor"
+      ];
+      // Subject names
+      let subjects = ["Physics", "Computer Network", "Data Structures", "Object - Oriented Programming", "Digital Circuits & Systems"];
+      let pass = []; // Pass/fail for each subject
+      let i = 0;
+      let count = 0;
+      // Calculate total and pass/fail for each subject
+      ids.forEach((id) => {
+        const val = parseInt(document.getElementById(id).value) || 0;
+        if (count % 6 == 0 && count != 0) {
+          if (totalOfOneSubject <= 30) {
+            // If subject total <= 30, fail
+            pass[i] = "fail";
+          } else if (totalOfOneSubject > 100) {
+            // If subject total > 100, invalid input
+            pass[i] = "invalid input";
+          } else {
+            // If subject total > 30, pass
+            pass[i] = "pass";
+          }
+          i++;
+          totalOfOneSubject = 0;
+        }
+        totalOfOneSubject += val;
+        x += val;
+        count++;
+      });
+      // Check last subject
+      if ((totalOfOneSubject <= 30)) {
+        // If subject total <= 30, fail
+        pass[i] = "fail";
+      } else if (totalOfOneSubject > 100) {
+        // If subject total > 100, invalid input
+        pass[i] = "invalid input";
+      } else {
+        // If subject total > 30, pass
+        pass[i] = "pass";
+      }    
+      // Check if major exam is passed for each subject
+      count = 5;
+      i = 0;
+      for (i; i < 5; i++) {
+        const val = parseInt(document.getElementById(ids[count]).value) || 0;
+        if (val <= 10 && pass[i] !== "invalid input") {
+          pass[i] = "fail";
+        } else if (val > 10 && pass[i] !== "invalid input") {
+          pass[i] = "pass";
+        } 
+        count = count + 6;
+      }
+      // checks for invalid inputs
+      if (x <= 500) {
+        // Assign grade based on total marks
+        let y;
+        if (x > 450) {
+          y = "AAA";
+        } else if (x <= 450 && x > 400) {
+          y = "AA";
+        } else if (x <= 400 && x > 350) {
+          y = "A";
+        } else if (x <= 350 && x > 300) {
+          y = "B+";
+        } else if (x <= 300 && x > 250) {
+          y = "B";
+        } else if (x <= 250 && x > 200) {
+          y = "C";
+        } else if (x == 200) {
+          y = "D";
+        } else {
+          y = "F"
+        }
+        // Show results
+        resultBox.innerHTML = `
+        <p><strong>${StudentName.toUpperCase()} (ID: ${StudentID})</strong></p>
+        <p>Total Marks: <strong>${x}</strong></p>
+        <p>Grade: <strong>${y}</strong></p>
+        `;
+      } else {
+        resultBox.innerHTML = `
+        <p><strong>${StudentName.toUpperCase()} (ID: ${StudentID})</strong></p>
+        <p>Total Marks: <strong>invalid input</strong></p>
+        <p>Grade: <strong>invalid input</strong></p>
+        `;
+      }
+      // Show pass/fail for each subject
+      for (let m = 0; m < 5; m++) {
+        resultBox.innerHTML = resultBox.innerHTML + `
+<p>${subjects[m]}: <strong>${pass[m]}</strong></p>`
+      }
+      resultBox.style.display = "block";
+    });
+
+    // Handle reset button click
+    document.querySelector("#reset").addEventListener("click", () => {
+      resultBox.innerHTML = "";
+      resultBox.style.display = "none";
+    })
+  </script>
 </body>
 
 </html>
